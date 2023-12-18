@@ -1,1 +1,0 @@
-export default interface ISendText {botId:string, phone: string, text: string }

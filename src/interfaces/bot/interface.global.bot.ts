@@ -1,15 +1,12 @@
-import { PrismaClient } from "@prisma/client";
-import { Contact, proto, } from "@whiskeysockets/baileys";
-import { Channel } from "amqplib";
-import TelegramBot from "node-telegram-bot-api";
-import { Server, Socket } from "socket.io";
+
 import cron from 'node-cron'
-import Flow from "src/bots/flow";
-import { BotconfigService } from "src/services/botconfig.service";
+
+
 import Icontact from "./interface.bot.contact";
 import { IsendMessage } from "./interface.bot.send";
 import { IGlobalGroups } from "./interface.bot.groups";
-import { StatusBot } from "src/enums/StatusBot";
+import { StatusBot } from "../../enums/StatusBot";
+import Flow from "../../class/Flow";
 
 type botCreds = {
     name?: string
@@ -27,23 +24,22 @@ type flowData =
 
 export interface IGlobalBot {
 
-    type: 'WA' | 'TEL'
     status: StatusBot,
     pastStatus: StatusBot,
 
     id: string | undefined,
     botId: string,
     mode: 'sniper' | 'attendant' | 'repasse',
-    clientServer: Server,
+  
     flows: Flow[],
     socketsCount: number,
     idClient: string,
-    socket?: any | TelegramBot;
-    info?: Contact;
+   
+    
     idDominated?: string
-    prisma?: PrismaClient
+   
     sleep: boolean
-    channel?: Channel
+  
 
     markedIds: string[]
 
@@ -56,10 +52,7 @@ export interface IGlobalBot {
 
     flow: string
     
-    setIo: (socket: Socket) => void
-
-    removeIo: (socket: Socket) => void
-
+    
     start: () => Promise<void>
 
     kill: (over?: boolean) => Promise<void>
