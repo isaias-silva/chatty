@@ -2,7 +2,6 @@
 import cron from 'node-cron'
 
 
-import Icontact from "./interface.bot.contact";
 import { IsendMessage } from "./interface.bot.send";
 import { IGlobalGroups } from "./interface.bot.groups";
 import { StatusBot } from "../../enums/StatusBot";
@@ -29,8 +28,7 @@ export interface IGlobalBot {
 
     id: string | undefined,
     botId: string,
-    mode: 'sniper' | 'attendant' | 'repasse',
-  
+   
     flows: Flow[],
     socketsCount: number,
     idClient: string,
@@ -48,7 +46,6 @@ export interface IGlobalBot {
     observer: boolean,
     wellcome: IsendMessage,
     bye: IsendMessage
-
 
     flow: string
     
@@ -71,18 +68,6 @@ export interface IGlobalBot {
 
     getMyChats: () => Promise<IGlobalGroups[]>
 
-    defineAndSendMessage: (messageSend: IsendMessage, id: string) => void
-
-    extractInfo: () => Promise<botCreds>
-    consumeRepasse: () => Promise<void>
-    consumeMessages: () => Promise<void>
-    cachMessages: (contact: Icontact) => Promise<void>
-    emitMessageNew: (contact: Icontact) => Promise<void>
-    storeMessages: (message: Icontact) => Promise<void>
-    startFlow: (jid: string, flowId: string,name?:string) => Promise<void>
-    getFlows: () => Promise<flowData[]>
-    repasse: (sendMessage: IsendMessage) => Promise<void>
-    stopFlow: (id: string) => Promise<void>
-
+ 
 
 }
